@@ -1,5 +1,7 @@
 import Authem from "@/components/authem";
-export default function Home() {
+import prisma from "@/lib/prisma";
+export default  function Home() {
+  
   return (
     <div>
       Home

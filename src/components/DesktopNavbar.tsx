@@ -40,8 +40,8 @@ const DesktopNavbar = async () => {
           <UserButton />
         </>
       ) : (
-        <SignInButton>
-          <Button className="bg-black text-white ">Sign</Button>
+        <SignInButton mode="modal">
+          <Button className="light:bg-black ">Sign</Button>
         </SignInButton>
       )}
     </div>
