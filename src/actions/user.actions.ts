@@ -55,4 +55,12 @@ export async function getUser(clerkId:string){
     }
     return user
 }
+export async function getId() {
+    const { userId: clerkId } = await auth();
+    if (!clerkId) return null 
+    const user= await getUser(clerkId)
+    if (!user) return null
+    return user.id
+    
+}
 
