@@ -1,14 +1,22 @@
-
-import { UserButton, SignInButton } from "@clerk/nextjs";
+'use client'
+import { UserButton, SignInButton, useUser } from "@clerk/nextjs";
 import {  HomeIcon, BellIcon, UserIcon } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import Mode from "./Mode";
 import { Button } from "./ui/button";
-import { currentUser } from "@clerk/nextjs/server";
+
 import Link from "next/link";
 
-const DesktopNavbar = async () => {
-  const user = await currentUser();
+const DesktopNavbar = () => {
+  const { user: authUser } = useUser()
+  useEffect(() => {
+    if (!authUser) return;
+    
+    
+  }, [authUser]);
+ 
+ 
+ 
   return (
     <div className="hidden lg:flex items-center gap-2">
       <Mode />
@@ -18,7 +26,7 @@ const DesktopNavbar = async () => {
           <span className="hidden lg:inline">Home</span>
         </Link>
       </Button>
-      {user ? (
+      {authUser? (
         <>
          <Button variant="ghost" className="flex items-center gap-2" asChild>
             <Link href="/notification" >
@@ -29,8 +37,8 @@ const DesktopNavbar = async () => {
           <Button variant="ghost" className="flex items-center gap-2" asChild>
             <Link
               href={`/profile/${
-                user?.username ??
-                user?.emailAddresses[0].emailAddress.split("@")[0]
+                authUser?.username ??
+                authUser?.emailAddresses[0].emailAddress.split("@")[0]
               }`}
             >
               <UserIcon className="w-4 h-4" />
